@@ -13,7 +13,7 @@ router.post("/createUser", async (req, res) => {
     return res.status(400).send("User already exists!");
   } else {
     user = new User({
-      name: req.body.name,
+      username: req.body.username,
       email: req.body.email,
       password: req.body.password,
       role: req.body.role,
@@ -21,6 +21,51 @@ router.post("/createUser", async (req, res) => {
     await user.save();
     res.send(user);
   }
+});
+
+router.get("/getUser/:id", async (req, res) => {
+  User.findById(req.params.id)
+    .then((userFound) => {
+      if (!userFound) {
+        return res.status(404).end();
+      }
+      return res.status(200).json(userFound);
+    })
+    .catch((error) => next(error));
+});
+
+router.put("/updateUser/:id", async (req, res) => {
+  User.findByIdAndUpdate(
+    req.params.id,
+    {
+      username: req.body.username,
+      email: req.body.email,
+      password: req.body.password,
+      role: req.body.role,
+    },
+    { new: true, returnOriginal: false }
+  )
+    .then((userUpdated) => {
+      if (!userUpdated) {
+        return res.status(404).end();
+      }
+      return res.status(200).json(userUpdated);
+    })
+    .catch((error) => next(error));
+});
+
+router.delete("/deleteUser/:id", async (req, res) => {
+  let id = req.params.id;
+  User.findByIdAndDelete(id, function (error, response) {
+    if (error) {
+      res
+        .status(404)
+        .json(`User with id:${id} was not deleted. Something went wrong.`)
+        .end();
+    } else {
+      res.status(200).json(`User with id:${id} deleted succesfully`);
+    }
+  });
 });
 
 router.get("/getUsers", async (req, res) => {
