@@ -38,6 +38,7 @@ function validateTask(task) {
     assigned: Joi.string(),
     reporter: Joi.string().required(),
     type: Joi.string(),
+    estimation: Joi.number(),
   });
   return schema.validate(task);
 }

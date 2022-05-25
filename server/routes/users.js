@@ -23,8 +23,9 @@ router.post("/createUser", async (req, res) => {
   }
 });
 
-router.get("/getUser/:id", async (req, res) => {
-  User.findById(req.params.id)
+router.get("/getUser/:username", async (req, res) => {
+  let username = req.params;
+  User.findOne(username)
     .then((userFound) => {
       if (!userFound) {
         return res.status(404).end();

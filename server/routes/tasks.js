@@ -27,9 +27,9 @@ router.post("/createTask", async (req, res) => {
 
 router.get("/getTasks", async (req, res) => {
   Task.find({}, function (error, tasks) {
-    let taskMap = {};
+    let taskMap = [];
     tasks.forEach(function (task) {
-      taskMap[task._id] = task;
+      taskMap.push(task);
     });
     res.send(taskMap);
   });
