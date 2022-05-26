@@ -18,16 +18,13 @@ const TaskList = () => {
       .catch((err) => console.log(err));
   };
 
-  //   fetchTasks();
-
   useEffect(() => {
-    console.log("asd");
     fetchTasks();
   }, [fetched]);
 
   return (
     <div className={styles.container}>
-      {list !== [] ? (
+      {fetched ? (
         list.map((element) => {
           return (
             <Task

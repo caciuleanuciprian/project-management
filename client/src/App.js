@@ -4,14 +4,25 @@ import Login from "./components/Users/Login";
 import TaskList from "./components/Tasks/TaskList";
 import CreateTaskForm from "./components/Tasks/CreateTaskForm";
 
+import CreateProjectForm from "./components/Projects/CreateProjectForm";
+import ProjectList from "./components/Projects/ProjectList";
+
+import Navigation from "./components/UI/Navigation";
+
+import styles from "./App.module.css";
+
 function App() {
   return (
     <div>
-      <h1>Hello</h1>
-      <Login />
-      {/* <Register /> */}
-      {/* <CreateTaskForm /> */}
-      {/* <TaskList /> */}
+      <Navigation />
+      <div className={styles.container}>
+        <Login />
+        <Register />
+        <CreateTaskForm />
+        <TaskList />
+        <CreateProjectForm />
+        <ProjectList />
+      </div>
     </div>
   );
 }
