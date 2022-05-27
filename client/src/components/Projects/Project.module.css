@@ -1,12 +1,10 @@
-* {
-  padding: 0;
-  margin: 0;
-  box-sizing: border-box;
-}
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
 
-.container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
+.settings {
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
+  padding: 8px;
+  background-color: #051367;
+  border-radius: 50%;
 }

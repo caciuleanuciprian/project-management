@@ -1,0 +1,94 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
+
+.notAuthBody {
+  width: 100vw;
+  height: 100vh;
+  background-color: #051367;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.3s ease-in-out;
+}
+
+.notAuthContainer {
+  display: flex;
+  flex-direction: column;
+  min-width: 50vw;
+  min-height: 30vh;
+  background-color: #2d31fa;
+  justify-content: space-evenly;
+  align-items: center;
+  border-radius: 25px;
+  transition: all 0.3s ease-in-out;
+}
+
+.notAuthParagraph {
+  width: 80%;
+  font-size: 36px;
+  text-align: center;
+  font-family: "Poppins", sans-serif;
+  color: #051367;
+  padding: 24px;
+  transition: all 0.3s ease-in-out;
+}
+
+.notAuthSpan {
+  animation: infinite pulse 5s ease-in-out;
+  transition: all 0.3s ease-in-out;
+}
+
+@keyframes pulse {
+  0% {
+    color: #051367;
+  }
+  50% {
+    color: #dff6ff;
+  }
+  100% {
+    color: #051367;
+  }
+}
+
+.notAuthButtonsContainer {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: space-evenly;
+  align-items: center;
+  padding: 24px;
+  transition: all 0.3s ease-in-out;
+}
+
+.notAuthButton {
+  padding: 12px 25px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 24px;
+  border-radius: 15px;
+  color: #051367;
+  transition: all 0.3s ease-in-out;
+}
+
+.notAuthButton:hover {
+  background-color: rgb(0, 0, 190);
+  color: #dff6ff;
+  transition: all 0.3s ease-in-out;
+}
+
+.authBody {
+  min-height: 100vh;
+  min-width: 100vw;
+  display: block;
+  position: relative;
+  z-index: -1;
+}
+
+.authContainer {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  margin-left: 80px;
+  background-color: #051367;
+  min-height: 100vh;
+}

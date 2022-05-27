@@ -1,8 +1,13 @@
 import { useEffect, useState } from "react";
-
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
+import styles from "./Login.module.css";
+import Loader from "../UI/Loader";
+
 const Login = () => {
+  const navigate = useNavigate();
+  const [fetching, setFetching] = useState(false);
   const [user, setUser] = useState();
   const [username, setUsername] = useState();
   const [password, setPassword] = useState();
@@ -30,10 +35,11 @@ const Login = () => {
   const redirectHome = (fetchedData) => {
     document.cookie = `id=${fetchedData._id}; max-age=3600; path=/`;
     document.cookie = `username=${fetchedData.username}; max-age=3600; path=/`;
-    // Add redirect to Home with React Router
+    navigate("/");
   };
 
   const getRequest = async () => {
+    setFetching(true);
     await axios
       .get(`${process.env.REACT_APP_API_LINK}/users/getUser/${username}`)
       .then((res) => res.data)
@@ -44,33 +50,43 @@ const Login = () => {
           throw new Error("Username or password do not match.");
         }
       })
-      .catch((error) => alert(error));
+      .catch((error) => {
+        alert(error);
+        setFetching(false);
+      });
   };
   return (
-    <form>
-      <label>Username</label>
+    <form className={styles.loginForm}>
       <input
+        className={styles.input}
         onChange={usernameHandler}
         name="username"
         type="username"
         placeholder="Username..."
       ></input>
-      <label>Password</label>
       <input
+        className={styles.input}
         onChange={passwordHandler}
         name="password"
         type="password"
         placeholder="Password..."
       ></input>
-      <button
-        type="button"
-        onClick={() => {
-          userHandler();
-          getRequest();
-        }}
-      >
-        Submit
-      </button>
+      {fetching ? (
+        <div className={styles.loader}>
+          <Loader />
+        </div>
+      ) : (
+        <button
+          className={styles.button}
+          type="button"
+          onClick={() => {
+            userHandler();
+            getRequest();
+          }}
+        >
+          Login
+        </button>
+      )}
     </form>
   );
 };

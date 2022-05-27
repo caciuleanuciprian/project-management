@@ -23,7 +23,7 @@ const ProjectList = () => {
   useEffect(() => {
     fetchProjects();
   }, [fetched]);
-
+  console.log(projectsList);
   return (
     <div className={styles.container}>
       {fetched ? (

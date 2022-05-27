@@ -11,19 +11,25 @@ import Navigation from "./components/UI/Navigation";
 
 import styles from "./App.module.css";
 
+import LoginPage from "./pages/LoginPage/LoginPage";
+import RegisterPage from "./pages/RegisterPage/RegisterPage";
+import HomePage from "./pages/HomePage/HomePage";
+import RoutesMap from "./routes/RoutesMap";
+
 function App() {
   return (
-    <div>
-      <Navigation />
-      <div className={styles.container}>
-        <Login />
-        <Register />
-        <CreateTaskForm />
-        <TaskList />
-        <CreateProjectForm />
-        <ProjectList />
-      </div>
-    </div>
+    // <div>
+    //   <Navigation />
+    //   <div className={styles.container}>
+    //     <Login />
+    //     <Register />
+    //     <CreateTaskForm />
+    //     <TaskList />
+    //     <CreateProjectForm />
+    //     <ProjectList />
+    //   </div>
+    // </div>
+    <RoutesMap />
   );
 }
 

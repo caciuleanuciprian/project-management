@@ -1,8 +1,13 @@
 import { useEffect, useState } from "react";
-
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import Loader from "../UI/Loader";
+
+import styles from "./Register.module.css";
 
 const Register = () => {
+  const navigate = useNavigate();
+  const [fetching, setFetching] = useState(false);
   const [user, setUser] = useState();
   const [username, setUsername] = useState();
   const [password, setPassword] = useState();
@@ -40,53 +45,73 @@ const Register = () => {
   }, [username, password, email, role]);
 
   const postRequest = () => {
+    setFetching(true);
     axios
       .post(`${process.env.REACT_APP_API_LINK}/users/createUser`, user)
-      .then((res) => console.log(res))
-      .catch((error) => alert(error.response.data));
+      .then((res) => res)
+      .then((error) => {
+        if (!error) {
+          navigate("/login");
+        }
+      })
+      .catch((error) => {
+        alert(error.response.data);
+        setFetching(false);
+      });
   };
   return (
-    <form>
-      <label>Username</label>
+    <form className={styles.registerForm}>
       <input
+        className={styles.input}
         onChange={usernameHandler}
         name="username"
         type="username"
         placeholder="Username..."
       ></input>
-      <label>Password</label>
       <input
+        className={styles.input}
         onChange={passwordHandler}
         name="password"
         type="password"
         placeholder="Password..."
       ></input>
-      <label>Email</label>
       <input
+        className={styles.input}
         onChange={emailHandler}
         name="email"
         type="email"
         placeholder="Email..."
       ></input>
-      <label>
-        Role <span>*if known</span>
-      </label>
-      <select onChange={roleHandler} defaultValue="" name="role">
-        <option value=""></option>
+      <select
+        className={styles.input}
+        onChange={roleHandler}
+        name="role"
+        defaultValue=""
+      >
+        <option value="" disabled>
+          Role *if known
+        </option>
         <option value="Project Manager">Project Manager</option>
         <option value="Product Owner">Product Owner</option>
         <option value="SCRUM Master">SCRUM Master</option>
         <option value="Developer">Developer</option>
       </select>
-      <button
-        type="button"
-        onClick={() => {
-          registerUser();
-          postRequest();
-        }}
-      >
-        Submit
-      </button>
+      {fetching ? (
+        <div className={styles.loader}>
+          <Loader />
+        </div>
+      ) : (
+        <button
+          className={styles.button}
+          type="button"
+          onClick={() => {
+            registerUser();
+            postRequest();
+          }}
+        >
+          Register
+        </button>
+      )}
     </form>
   );
 };
