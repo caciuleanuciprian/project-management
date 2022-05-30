@@ -48,11 +48,9 @@ const Register = () => {
     setFetching(true);
     axios
       .post(`${process.env.REACT_APP_API_LINK}/users/createUser`, user)
-      .then((res) => res)
-      .then((error) => {
-        if (!error) {
-          navigate("/login");
-        }
+      .then((res) => res.data)
+      .then((data) => {
+        navigate("/login");
       })
       .catch((error) => {
         alert(error.response.data);

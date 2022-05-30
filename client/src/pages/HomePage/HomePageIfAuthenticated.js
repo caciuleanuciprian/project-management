@@ -4,13 +4,18 @@ import ProjectList from "../../components/Projects/ProjectList";
 
 import styles from "./HomePage.module.css";
 
-const HomePageIfAuthenticated = () => {
+const HomePageIfAuthenticated = (props) => {
   return (
     <Fragment>
       <Navigation />
       <div className={styles.authBody}>
         <div className={styles.authContainer}>
-          <h1>Homepage</h1>
+          <p className={styles.authTitle}>
+            Welcome,{" "}
+            <span className={styles.currentUser}>
+              {props.currentAuthenticatedUser}
+            </span>
+          </p>
           <ProjectList />
         </div>
       </div>

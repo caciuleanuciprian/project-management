@@ -20,6 +20,8 @@
   align-items: center;
   border-radius: 25px;
   transition: all 0.3s ease-in-out;
+  -webkit-box-shadow: 10px 10px 5px 5px rgba(0, 0, 0, 0.1);
+  box-shadow: 10px 10px 5px 5px rgba(0, 0, 0, 0.1);
 }
 
 .notAuthParagraph {
@@ -81,7 +83,6 @@
   min-width: 100vw;
   display: block;
   position: relative;
-  z-index: -1;
 }
 
 .authContainer {
@@ -91,4 +92,28 @@
   margin-left: 80px;
   background-color: #051367;
   min-height: 100vh;
+}
+
+.authTitle {
+  color: #dff6ff;
+  padding-top: 24px;
+  padding-left: 24px;
+  font-size: 36px;
+  font-weight: 500;
+  -webkit-user-select: none; /* Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* IE10+/Edge */
+  user-select: none; /* Standard */
+}
+
+.currentUser {
+  text-transform: capitalize;
+  font-weight: 500;
+  background-color: #2d31fa;
+  padding: 0px 12px 6px 12px;
+  border-radius: 15px;
+  -webkit-user-select: none; /* Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* IE10+/Edge */
+  user-select: none; /* Standard */
 }

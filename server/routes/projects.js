@@ -33,37 +33,15 @@ router.get("/getProjects", async (req, res) => {
   });
 });
 
-// router.get("/getUser/:username", async (req, res) => {
-//   let username = req.params;
-//   User.findOne(username)
-//     .then((userFound) => {
-//       if (!userFound) {
-//         return res.status(404).end();
-//       }
-//       return res.status(200).json(userFound);
-//     })
-//     .catch((error) => next(error));
-// });
-
-// router.put("/updateUser/:id", async (req, res) => {
-//   User.findByIdAndUpdate(
-//     req.params.id,
-//     {
-//       username: req.body.username,
-//       email: req.body.email,
-//       password: req.body.password,
-//       role: req.body.role,
-//     },
-//     { new: true, returnOriginal: false }
-//   )
-//     .then((userUpdated) => {
-//       if (!userUpdated) {
-//         return res.status(404).end();
-//       }
-//       return res.status(200).json(userUpdated);
-//     })
-//     .catch((error) => next(error));
-// });
+router.get("/:id", async (req, res) => {
+  Project.findById(req.params.id).then((project) => {
+    if (!project) {
+      return res.status(404).end();
+    } else {
+      return res.status(200).json(project);
+    }
+  });
+});
 
 router.put("/updateProject/:id", async (req, res) => {
   Project.findByIdAndUpdate(

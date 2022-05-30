@@ -1,6 +1,8 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 
+import styles from "./CreateProjectForm.module.css";
+
 const CreateProjectForm = () => {
   const [project, setProject] = useState();
   const [title, setTitle] = useState();
@@ -33,22 +35,24 @@ const CreateProjectForm = () => {
   };
 
   return (
-    <form>
-      <label>Title</label>
+    <form className={styles.container}>
       <input
         type="text"
         value={title}
         name="title"
         onChange={titleHandler}
+        placeholder="Title"
+        className={styles.input}
       ></input>
-      <label>Description</label>
       <input
         type="text"
         value={description}
         name="description"
         onChange={descriptionHandler}
+        placeholder="Description"
+        className={styles.input}
       ></input>
-      <button type="button" onClick={submitTask}>
+      <button type="button" onClick={submitTask} className={styles.button}>
         Submit
       </button>
     </form>

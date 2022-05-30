@@ -3,10 +3,16 @@ import axios from "axios";
 import Project from "./Project";
 
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 import styles from "./ProjectList.module.css";
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCirclePlus } from "@fortawesome/free-solid-svg-icons";
+import Loader from "../UI/Loader";
+
 const ProjectList = () => {
+  const navigate = useNavigate();
   const [projectsList, setProjectsList] = useState([]);
   const [fetched, setFetched] = useState(false);
   const fetchProjects = () => {
@@ -23,7 +29,7 @@ const ProjectList = () => {
   useEffect(() => {
     fetchProjects();
   }, [fetched]);
-  console.log(projectsList);
+
   return (
     <div className={styles.container}>
       {fetched ? (
@@ -31,6 +37,7 @@ const ProjectList = () => {
           return (
             <Project
               key={element._id}
+              id={element._id}
               title={element.title}
               description={element.description}
               tasks={element.tasks}
@@ -39,7 +46,20 @@ const ProjectList = () => {
           );
         })
       ) : (
-        <h1>Loading...</h1>
+        <div className={styles.loader}>
+          <Loader />
+        </div>
+      )}
+      {fetched ? (
+        <div
+          onClick={() => navigate("/projects/create")}
+          className={styles.containerFacade}
+        >
+          <h1 className={styles.titleFacade}>{"Create a new project"}</h1>
+          <FontAwesomeIcon icon={faCirclePlus} className={styles.plus} />
+        </div>
+      ) : (
+        ""
       )}
     </div>
   );

@@ -19,7 +19,6 @@ import { useState } from "react";
 
 const Navigation = () => {
   const [isInside, setIsInside] = useState();
-  console.log(isInside);
   return (
     <nav
       onMouseEnter={() => setIsInside(true)}
@@ -32,19 +31,45 @@ const Navigation = () => {
       />
       <ul className={isInside ? styles.menu : styles.menuToggle}>
         <p className={styles.section}>ANALYTICS</p>
-        <NavigationNode icon={faTableColumns} text="Dashboard" />
-        <NavigationNode icon={faChartLine} text="Performance" />
+        <NavigationNode
+          implemented={true}
+          icon={faTableColumns}
+          text="Dashboard"
+          link="/"
+        />
+        <NavigationNode
+          implemented={false}
+          icon={faChartLine}
+          text="Performance"
+        />
         <p className={styles.section}>CONTENT</p>
-        <NavigationNode icon={faBug} text="Issues" />
-        <NavigationNode icon={faCodeBranch} text="Branches" />
-        <NavigationNode icon={faCodePullRequest} text="Pull requests" />
-        <NavigationNode icon={faTerminal} text="Terminal" />
+        <NavigationNode implemented={true} icon={faBug} text="Issues" />
+        <NavigationNode
+          implemented={false}
+          icon={faCodeBranch}
+          text="Branches"
+        />
+        <NavigationNode
+          implemented={false}
+          icon={faCodePullRequest}
+          text="Pull requests"
+        />
+        <NavigationNode implemented={false} icon={faTerminal} text="Terminal" />
         <p className={styles.section}>CUSTOMIZATION</p>
-        <NavigationNode icon={faCalendar} text="Calendar" />
-        <NavigationNode icon={faPeopleGroup} text="Members" />
+        <NavigationNode implemented={false} icon={faCalendar} text="Calendar" />
+        <NavigationNode
+          implemented={false}
+          icon={faPeopleGroup}
+          text="Members"
+        />
         <p className={styles.section}>ACCOUNT</p>
-        <NavigationNode icon={faUser} text="Profile" />
-        <NavigationNode icon={faRightFromBracket} text="Logout" />
+        <NavigationNode implemented={true} icon={faUser} text="Profile" />
+        <NavigationNode
+          implemented={true}
+          icon={faRightFromBracket}
+          text="Logout"
+          link="/logout"
+        />
       </ul>
     </nav>
   );
