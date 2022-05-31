@@ -66,6 +66,27 @@ router.put("/updateProject/:id", async (req, res) => {
     .catch((error) => next(error));
 });
 
+router.put("/updateProjectWithTasks/:id", async (req, res) => {
+  Project.findByIdAndUpdate(
+    req.params.id,
+    {
+      tasks: req.body.tasks,
+    },
+    {
+      new: true,
+      returnOriginal: false,
+    }
+  )
+    .then((projectUpdated) => {
+      console.log(projectUpdated);
+      if (!projectUpdated) {
+        return res.status(404).end();
+      }
+      return res.status(200).json(projectUpdated);
+    })
+    .catch((error) => next(error));
+});
+
 router.delete("/deleteProject/:id", async (req, res) => {
   let id = req.params.id;
   Project.findByIdAndDelete(id, function (error, response) {

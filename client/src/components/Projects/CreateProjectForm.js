@@ -44,14 +44,14 @@ const CreateProjectForm = () => {
         placeholder="Title"
         className={styles.input}
       ></input>
-      <input
+      <textarea
         type="text"
         value={description}
         name="description"
         onChange={descriptionHandler}
         placeholder="Description"
-        className={styles.input}
-      ></input>
+        className={styles.textarea}
+      ></textarea>
       <button type="button" onClick={submitTask} className={styles.button}>
         Submit
       </button>

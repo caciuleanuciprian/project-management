@@ -1,12 +1,27 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 
-const CreateTaskForm = () => {
+import styles from "./CreateTaskForm.module.css";
+
+const CreateTaskForm = (props) => {
+  const getUsernameCookie = () => {
+    var username = "username=";
+    var ca = document.cookie.split(";");
+    for (var i = 0; i < ca.length; i++) {
+      var c = ca[i];
+      while (c.charAt(0) == " ") c = c.substring(1, c.length);
+      if (c.indexOf(username) == 0)
+        return c.substring(username.length, c.length);
+    }
+    return null;
+  };
+
+  const [currentUser, setCurrentUser] = useState(getUsernameCookie());
   const [task, setTask] = useState();
   const [title, setTitle] = useState();
   const [description, setDescription] = useState();
   const [assigned, setAssigned] = useState();
-  const [reporter, setReporter] = useState();
+  const [reporter, setReporter] = useState(currentUser);
   const [type, setType] = useState();
   const [estimation, setEstimation] = useState();
 
@@ -46,56 +61,81 @@ const CreateTaskForm = () => {
   }, [title, description, assigned, reporter, type, estimation]);
 
   const submitTask = () => {
-    axios.post(`${process.env.REACT_APP_API_LINK}/tasks/createTask`, task);
+    axios
+      .post(`${process.env.REACT_APP_API_LINK}/tasks/createTask`, task)
+      .then((res) => res.data)
+      .then((data) => props.sendTaskIdToParent(data._id))
+      .catch((error) => console.log(error));
   };
 
   console.log(task);
 
   return (
-    <form>
-      <label>Title</label>
+    <form className={styles.container}>
       <input
         type="text"
         value={title}
         name="title"
         onChange={titleHandler}
+        className={styles.input}
+        placeholder="Title"
       ></input>
-      <label>Description</label>
-      <input
+      <textarea
+        placeholder="Description"
         type="text"
         value={description}
         name="description"
         onChange={descriptionHandler}
-      ></input>
-      <label>Assigned</label>
-      <select defaultValue="" name="assigned" onChange={assignedHandler}>
-        <option value=""></option>
+        className={styles.textarea}
+      ></textarea>
+      <select
+        className={styles.input}
+        defaultValue=""
+        name="assigned"
+        onChange={assignedHandler}
+      >
+        <option value="" disabled>
+          Assigned
+        </option>
         <option value="A">A</option>
         <option value="B">B</option>
         <option value="C">C</option>
       </select>
-      <label>Reporter</label>
       <input
+        disabled
+        placeholder="Reporter"
+        className={styles.input}
         type="text"
         value={reporter}
         name="reporter"
         onChange={reporterHandler}
+        style={{
+          textTransform: "capitalize",
+          opacity: 0.5,
+        }}
       ></input>
-      <label>Type</label>
-      <select defaultValue="" name="type" onChange={typeHandler}>
-        <option value=""></option>
+      <select
+        defaultValue=""
+        name="type"
+        onChange={typeHandler}
+        className={styles.input}
+      >
+        <option value="" disabled>
+          Type
+        </option>
         <option value="A">A</option>
         <option value="B">B</option>
         <option value="C">C</option>
       </select>
-      <label>Estimation</label>
       <input
+        placeholder="Estimation"
+        className={styles.input}
         type="text"
         value={estimation}
         name="estimation"
         onChange={estimationHandler}
       ></input>
-      <button type="button" onClick={submitTask}>
+      <button className={styles.button} type="button" onClick={submitTask}>
         Submit
       </button>
     </form>

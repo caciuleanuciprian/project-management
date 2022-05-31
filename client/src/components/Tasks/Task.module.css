@@ -1,10 +1,66 @@
 .container {
   display: flex;
-  justify-content: center;
+  justify-content: space-evenly;
   align-items: flex-start;
   flex-direction: column;
-  border: 2px solid black;
   flex-wrap: nowrap;
-  width: 30%;
-  margin: 5px;
+  width: 100%;
+  margin: 6px 0px;
+  padding: 12px;
+  border-radius: 15px;
+  font-family: "Poppins", sans-serif;
+  background-color: #051367;
+  color: #dff6ff;
+  transition: all 0.3s ease-in-out;
+  user-select: none;
+  cursor: pointer;
+  z-index: 2;
+}
+
+.container:hover {
+  transform: scale(1.03);
+  transition: all 0.3s ease-in-out;
+}
+
+.title {
+  font-size: 18px;
+  font-weight: 700;
+  width: 100%;
+  margin-bottom: 12px;
+}
+
+.description {
+  overflow: hidden;
+  position: relative;
+  line-height: 20px;
+  max-height: 40px;
+  white-space: nowrap;
+  word-break: break-all;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-bottom: 24px;
+  width: 100%;
+}
+
+.people {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.smallText {
+  font-size: 14px;
+}
+.assigned {
+  font-size: 14px;
+}
+.reporter {
+  font-size: 14px;
+}
+.type {
+  font-size: 14px;
+}
+.estimation {
+  font-size: 14px;
 }

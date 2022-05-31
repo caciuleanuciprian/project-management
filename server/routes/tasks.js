@@ -35,4 +35,14 @@ router.get("/getTasks", async (req, res) => {
   });
 });
 
+router.get("/:id", async (req, res) => {
+  Task.findById(req.params.id).then((task) => {
+    if (!task) {
+      return res.status(404).end();
+    } else {
+      return res.status(200).json(task);
+    }
+  });
+});
+
 module.exports = router;
