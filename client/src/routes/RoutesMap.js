@@ -7,6 +7,7 @@ import ProjectPage from "../pages/ProjectPage/ProjectPage";
 import CreateProjectPage from "../pages/ProjectPage/CreateProjectPage";
 import LogoutPage from "../pages/LogoutPage/LogoutPage";
 import CreateTaskPage from "../pages/TaskPage/CreateTaskPage";
+import IssuesPage from "../pages/IssuesPage/IssuesPage";
 
 const RoutesMap = () => {
   return (
@@ -18,6 +19,7 @@ const RoutesMap = () => {
       <Route path="/projects/create" element={<CreateProjectPage />} />
       <Route path="/logout" element={<LogoutPage />} />
       <Route path="/projects/:id/create-task" element={<CreateTaskPage />} />
+      <Route path="/issues" element={<IssuesPage />} />
     </Routes>
   );
 };

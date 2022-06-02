@@ -5,6 +5,8 @@ import Loader from "../UI/Loader";
 
 import styles from "./Register.module.css";
 
+import { NotificationManager } from "react-notifications";
+
 const Register = () => {
   const navigate = useNavigate();
   const [fetching, setFetching] = useState(false);
@@ -50,10 +52,17 @@ const Register = () => {
       .post(`${process.env.REACT_APP_API_LINK}/users/createUser`, user)
       .then((res) => res.data)
       .then((data) => {
-        navigate("/login");
+        NotificationManager.success(
+          "Register succesfully. You will be redirected to login.",
+          "",
+          3000
+        );
+        setTimeout(() => {
+          navigate("/");
+        }, 3000);
       })
       .catch((error) => {
-        alert(error.response.data);
+        NotificationManager.error(`${error.response.data}`, "", 3000);
         setFetching(false);
       });
   };

@@ -1,0 +1,27 @@
+.issuesBody {
+  min-height: 100vh;
+  min-width: 100vw;
+  display: block;
+  position: relative;
+}
+
+.issuesContainer {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  margin-left: 80px;
+  background-color: #051367;
+  min-height: 100vh;
+}
+
+.issuesTitle {
+  color: #dff6ff;
+  padding-top: 24px;
+  padding-left: 24px;
+  font-size: 36px;
+  font-weight: 500;
+  -webkit-user-select: none; /* Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* IE10+/Edge */
+  user-select: none; /* Standard */
+}

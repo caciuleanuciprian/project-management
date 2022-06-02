@@ -5,6 +5,8 @@ import axios from "axios";
 import styles from "./Login.module.css";
 import Loader from "../UI/Loader";
 
+import { NotificationManager } from "react-notifications";
+
 const Login = () => {
   const navigate = useNavigate();
   const [fetching, setFetching] = useState(false);
@@ -33,9 +35,16 @@ const Login = () => {
   }, [username, password]);
 
   const redirectHome = (fetchedData) => {
+    NotificationManager.success(
+      "Login succesfully. You will be redirected to homepage.",
+      "",
+      3000
+    );
     document.cookie = `id=${fetchedData._id}; max-age=3600; path=/`;
     document.cookie = `username=${fetchedData.username}; max-age=3600; path=/`;
-    navigate("/");
+    setTimeout(() => {
+      navigate("/");
+    }, 3000);
   };
 
   const getRequest = async () => {
@@ -51,7 +60,11 @@ const Login = () => {
         }
       })
       .catch((error) => {
-        alert(error);
+        NotificationManager.error(
+          `Username or password is incorrect!`,
+          "",
+          3000
+        );
         setFetching(false);
       });
   };

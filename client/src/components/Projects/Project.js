@@ -6,6 +6,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGear } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
 
+import ReactToolTip from "react-tooltip";
+
 const Project = (props) => {
   const navigate = useNavigate();
   const navigateToProject = () => {
@@ -19,9 +21,18 @@ const Project = (props) => {
         <p className={styles.description}>{props.description}</p>
       </div>
       <FontAwesomeIcon
+        data-tip="Settings"
+        data-for="settings"
         onClick={() => console.log("open settings")}
         className={styles.settings}
         icon={faGear}
+      />
+      <ReactToolTip
+        id="settings"
+        backgroundColor="#2d31fa"
+        place="right"
+        offset="{'right': 20}"
+        type="dark"
       />
     </div>
   );

@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 
 import styles from "./CreateProjectForm.module.css";
 
+import { NotificationManager } from "react-notifications";
+
 const CreateProjectForm = () => {
   const [project, setProject] = useState();
   const [title, setTitle] = useState();
@@ -28,10 +30,14 @@ const CreateProjectForm = () => {
   }, [title, description]);
 
   const submitTask = () => {
-    axios.post(
-      `${process.env.REACT_APP_API_LINK}/projects/createProject`,
-      project
-    );
+    axios
+      .post(`${process.env.REACT_APP_API_LINK}/projects/createProject`, project)
+      .then((res) =>
+        NotificationManager.success("Project added succesfully.", "", 3000)
+      )
+      .catch((error) =>
+        NotificationManager.error(`${error.response.data}`, "", 3000)
+      );
   };
 
   return (

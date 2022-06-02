@@ -15,6 +15,8 @@ import LoginPage from "./pages/LoginPage/LoginPage";
 import RegisterPage from "./pages/RegisterPage/RegisterPage";
 import HomePage from "./pages/HomePage/HomePage";
 import RoutesMap from "./routes/RoutesMap";
+import { Fragment } from "react";
+import { NotificationContainer } from "react-notifications";
 
 function App() {
   return (
@@ -29,7 +31,10 @@ function App() {
     //     <ProjectList />
     //   </div>
     // </div>
-    <RoutesMap />
+    <Fragment>
+      <RoutesMap />
+      <NotificationContainer />
+    </Fragment>
   );
 }
 

@@ -1,5 +1,6 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
+import Loader from "../UI/Loader";
 import Task from "./Task";
 
 import styles from "./TaskList.module.css";
@@ -23,26 +24,30 @@ const TaskList = () => {
   }, [fetched]);
 
   return (
-    <div className={styles.container}>
+    <Fragment>
       {fetched ? (
-        list.map((element) => {
-          return (
-            <Task
-              key={element._id}
-              taskId={element._id}
-              title={element.title}
-              description={element.description}
-              assigned={element.assigned}
-              reporter={element.reporter}
-              type={element.type}
-              estimation={element.estimation}
-            />
-          );
-        })
+        <div className={styles.container}>
+          {list.map((element) => {
+            return (
+              <Task
+                key={element._id}
+                taskId={element._id}
+                title={element.title}
+                description={element.description}
+                assigned={element.assigned}
+                reporter={element.reporter}
+                type={element.type}
+                estimation={element.estimation}
+              />
+            );
+          })}
+        </div>
       ) : (
-        <h1>Loading...</h1>
+        <div className={styles.loader}>
+          <Loader />
+        </div>
       )}
-    </div>
+    </Fragment>
   );
 };
 

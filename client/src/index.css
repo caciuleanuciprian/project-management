@@ -18,3 +18,72 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+.notification-container {
+  position: absolute;
+  width: 300px;
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 24px;
+  right: 24px;
+  border-radius: 15px;
+  padding: 12px;
+  user-select: none;
+}
+
+.notification-success {
+  background-color: green;
+  width: 100%;
+  border-radius: 15px;
+  margin-top: 12px;
+  opacity: 0.5;
+  transition: all 0.3s ease-in-out;
+}
+
+.notification-success:hover {
+  opacity: 1;
+  transition: all 0.3s ease-in-out;
+}
+
+.notification-error {
+  background-color: red;
+  width: 100%;
+  border-radius: 15px;
+  margin-top: 12px;
+  opacity: 0.5;
+  transition: all 0.3s ease-in-out;
+}
+
+.notification-error:hover {
+  opacity: 1;
+  transition: all 0.3s ease-in-out;
+}
+
+.notification-message {
+  padding: 12px 24px;
+}
+
+.notification-message .title {
+  display: none;
+}
+
+.notification-message .message {
+  font-size: 16px;
+  text-align: center;
+  color: #dff6ff;
+  font-weight: 700;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: #2d31fa;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #dff6ff;
+}

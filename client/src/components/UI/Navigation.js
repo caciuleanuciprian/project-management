@@ -43,7 +43,12 @@ const Navigation = () => {
           text="Performance"
         />
         <p className={styles.section}>CONTENT</p>
-        <NavigationNode implemented={true} icon={faBug} text="Issues" />
+        <NavigationNode
+          implemented={true}
+          icon={faBug}
+          text="Issues"
+          link="/issues"
+        />
         <NavigationNode
           implemented={false}
           icon={faCodeBranch}

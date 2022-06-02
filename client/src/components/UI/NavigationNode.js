@@ -1,34 +1,42 @@
 import styles from "./Navigation.module.css";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useNavigate } from "react-router-dom";
+
+import ReactToolTip from "react-tooltip";
+
+import { Link } from "react-router-dom";
+
 const NavigationNode = (props) => {
-  const navigate = useNavigate();
   return props.implemented ? (
-    // eslint-disable-next-line jsx-a11y/anchor-is-valid
-    <a
-      onClick={() => {
-        navigate(props.link);
-      }}
-      className={styles.linkBtn}
-    >
+    <Link className={styles.linkBtn} to={`${props.link}`}>
       <li className={styles.sidebarLi}>
         <div>
           <FontAwesomeIcon icon={props.icon} className={styles.sidebarIcon} />
           <span className={styles.textBtn}>{props.text}</span>
         </div>
       </li>
-    </a>
+    </Link>
   ) : (
-    // eslint-disable-next-line jsx-a11y/anchor-is-valid
-    <a href="#" className={styles.linkBtn}>
+    <Link
+      to={`#`}
+      data-tip="NOT IMPLEMENTED"
+      data-for="navigation"
+      className={styles.linkBtn}
+    >
       <li className={styles.sidebarLiNotImplemented}>
         <div>
           <FontAwesomeIcon icon={props.icon} className={styles.sidebarIcon} />
           <span className={styles.textBtn}>{props.text}</span>
         </div>
       </li>
-    </a>
+      <ReactToolTip
+        backgroundColor="#051367"
+        id="navigation"
+        place="right"
+        offset="{'right': 10}"
+        type="dark"
+      />
+    </Link>
   );
 };
 

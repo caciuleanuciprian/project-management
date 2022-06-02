@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 
 import styles from "./CreateTaskForm.module.css";
 
+import { NotificationManager } from "react-notifications";
+
 const CreateTaskForm = (props) => {
   const getUsernameCookie = () => {
     var username = "username=";
@@ -63,9 +65,14 @@ const CreateTaskForm = (props) => {
   const submitTask = () => {
     axios
       .post(`${process.env.REACT_APP_API_LINK}/tasks/createTask`, task)
-      .then((res) => res.data)
+      .then((res) => {
+        NotificationManager.success("Task added succesfully.", "", 3000);
+        return res.data;
+      })
       .then((data) => props.sendTaskIdToParent(data._id))
-      .catch((error) => console.log(error));
+      .catch((error) =>
+        NotificationManager.error(`${error.response.data}`, "", 3000)
+      );
   };
 
   console.log(task);
