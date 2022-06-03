@@ -33,7 +33,6 @@ const NavigationNode = (props) => {
         backgroundColor="#051367"
         id="navigation"
         place="right"
-        offset="{'right': 10}"
         type="dark"
       />
     </Link>

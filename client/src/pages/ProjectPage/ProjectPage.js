@@ -42,7 +42,7 @@ const ProjectPage = () => {
 
   useEffect(() => {
     displayTasksIfFetched();
-  }, data);
+  }, [data]);
   console.log(tasksInfo);
   return (
     <Fragment>
@@ -73,19 +73,25 @@ const ProjectPage = () => {
             <div className={styles.tasksList}>
               <div className={styles.column}>
                 <p className={styles.columnTitle}>Backlog</p>
-                {tasksInfo?.map((task) => {
-                  return (
-                    <Task
-                      key={task._id}
-                      title={task.title}
-                      description={task.description}
-                      assigned={task.assigned}
-                      reporter={task.reporter}
-                      type={task.type}
-                      estimation={task.estimation}
-                    />
-                  );
-                })}
+                {tasksInfo.length === 0 ? (
+                  <div>
+                    <Loader />
+                  </div>
+                ) : (
+                  tasksInfo?.map((task) => {
+                    return (
+                      <Task
+                        key={task._id}
+                        title={task.title}
+                        description={task.description}
+                        assigned={task.assigned}
+                        reporter={task.reporter}
+                        type={task.type}
+                        estimation={task.estimation}
+                      />
+                    );
+                  })
+                )}
               </div>
               <div className={styles.column}>
                 <p className={styles.columnTitle}>Development</p>

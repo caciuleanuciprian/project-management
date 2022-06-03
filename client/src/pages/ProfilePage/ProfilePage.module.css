@@ -1,0 +1,100 @@
+.profileBody {
+  min-height: 100vh;
+  min-width: 100vw;
+  display: block;
+  position: relative;
+}
+
+.profileContainer {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  margin-left: 80px;
+  background-color: #051367;
+  min-height: 100vh;
+}
+
+.profileInfoContainer {
+  background-color: #2d31fa;
+  border-radius: 15px;
+  margin: 24px;
+  padding: 24px;
+}
+
+.profileTitle {
+  color: #dff6ff;
+  padding-top: 24px;
+  padding-left: 24px;
+  font-size: 36px;
+  font-weight: 500;
+  -webkit-user-select: none; /* Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* IE10+/Edge */
+  user-select: none; /* Standard */
+}
+
+.loader {
+  margin: 24px;
+}
+
+.profileInfo {
+  margin: 24px;
+  color: #dff6ff;
+}
+
+.profileField {
+  font-size: 24px;
+  margin-bottom: 6px;
+}
+
+.profileUsername {
+  text-transform: capitalize;
+}
+
+.profileTasks {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  color: #dff6ff;
+}
+
+.delimiter {
+  color: #dff6ff;
+  height: 2px;
+  margin: 36px 0px 24px 0px;
+}
+
+.profileTasksContainer {
+  position: relative;
+  justify-content: space-between;
+  width: 100%;
+  overflow-x: scroll;
+  display: flex;
+  padding: 12px;
+  border-bottom: 2px #dff6ff solid;
+  background-color: #051367;
+}
+
+.profileTasksTitle {
+  font-size: 24px;
+}
+
+.profileTasksOpened {
+  margin: 6px 0px 12px 12px;
+  font-size: 16px;
+}
+
+.profileTasksClosed {
+  margin: 24px 0px 12px 12px;
+  font-size: 16px;
+}
+
+.profileTaskElement {
+  position: relative;
+  min-width: 15%;
+  display: inline-block;
+  padding: 6px 12px;
+  background-color: #2d31fa;
+  border-radius: 15px;
+  margin-right: 12px;
+}

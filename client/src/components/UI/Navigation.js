@@ -68,7 +68,12 @@ const Navigation = () => {
           text="Members"
         />
         <p className={styles.section}>ACCOUNT</p>
-        <NavigationNode implemented={true} icon={faUser} text="Profile" />
+        <NavigationNode
+          implemented={true}
+          icon={faUser}
+          text="Profile"
+          link="/me"
+        />
         <NavigationNode
           implemented={true}
           icon={faRightFromBracket}

@@ -31,7 +31,6 @@ const Project = (props) => {
         id="settings"
         backgroundColor="#2d31fa"
         place="right"
-        offset="{'right': 20}"
         type="dark"
       />
     </div>

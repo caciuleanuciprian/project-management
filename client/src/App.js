@@ -16,21 +16,13 @@ import RegisterPage from "./pages/RegisterPage/RegisterPage";
 import HomePage from "./pages/HomePage/HomePage";
 import RoutesMap from "./routes/RoutesMap";
 import { Fragment } from "react";
-import { NotificationContainer } from "react-notifications";
+import {
+  NotificationContainer,
+  NotificationManager,
+} from "react-notifications";
 
 function App() {
   return (
-    // <div>
-    //   <Navigation />
-    //   <div className={styles.container}>
-    //     <Login />
-    //     <Register />
-    //     <CreateTaskForm />
-    //     <TaskList />
-    //     <CreateProjectForm />
-    //     <ProjectList />
-    //   </div>
-    // </div>
     <Fragment>
       <RoutesMap />
       <NotificationContainer />
