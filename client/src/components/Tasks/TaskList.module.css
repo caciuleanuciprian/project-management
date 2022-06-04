@@ -1,7 +1,7 @@
 .container {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
   flex-direction: column;
   flex-wrap: wrap;
   background-color: #2d31fa;
@@ -14,4 +14,8 @@
 .loader {
   margin-left: 24px;
   margin-top: 12px;
+}
+
+.issuesParagraph {
+  color: #dff6ff;
 }

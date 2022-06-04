@@ -22,26 +22,32 @@ const TaskList = () => {
   useEffect(() => {
     fetchTasks();
   }, [fetched]);
-
+  console.log(list);
   return (
     <Fragment>
       {fetched ? (
-        <div className={styles.container}>
-          {list.map((element) => {
-            return (
-              <Task
-                key={element._id}
-                taskId={element._id}
-                title={element.title}
-                description={element.description}
-                assigned={element.assigned}
-                reporter={element.reporter}
-                type={element.type}
-                estimation={element.estimation}
-              />
-            );
-          })}
-        </div>
+        list.length > 0 ? (
+          <div className={styles.container}>
+            {list.map((element) => {
+              return (
+                <Task
+                  key={element._id}
+                  taskId={element._id}
+                  title={element.title}
+                  description={element.description}
+                  assigned={element.assigned}
+                  reporter={element.reporter}
+                  type={element.type}
+                  estimation={element.estimation}
+                />
+              );
+            })}
+          </div>
+        ) : (
+          <div className={styles.container}>
+            <p className={styles.issuesParagraph}>There are no tasks.</p>
+          </div>
+        )
       ) : (
         <div className={styles.loader}>
           <Loader />

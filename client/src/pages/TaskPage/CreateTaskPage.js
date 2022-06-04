@@ -1,5 +1,5 @@
 import { Fragment, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 import Navigation from "../../components/UI/Navigation";
 
@@ -13,6 +13,7 @@ const tasksArray = [];
 const CreateTaskPage = () => {
   const [data, setData] = useState();
   const location = useLocation();
+  const navigate = useNavigate();
 
   const fetchData = () => {
     axios
@@ -24,6 +25,8 @@ const CreateTaskPage = () => {
   if (data === undefined) {
     fetchData();
   }
+
+  console.log(location.state);
 
   const addTaskToProject = (id) => {
     tasksArray.push(id);
@@ -46,6 +49,14 @@ const CreateTaskPage = () => {
           </div>
         ) : (
           <div className={styles.createTaskMiddleContainer}>
+            <button
+              className={styles.backBtn}
+              onClick={() => {
+                navigate(location.state);
+              }}
+            >
+              Back
+            </button>
             <h1 className={styles.createTaskTitle}>
               Create a new task for project: {data?.title}
             </h1>

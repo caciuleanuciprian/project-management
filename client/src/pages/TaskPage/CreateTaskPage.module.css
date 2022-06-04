@@ -41,3 +41,27 @@
   padding: 24px;
   transition: all 0.3s ease-in-out;
 }
+
+.backBtn {
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin: 24px;
+  padding: 12px 25px;
+  text-align: center;
+  font-size: 20px;
+  border: none;
+  background: transparent;
+  color: #2d31fa;
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
+  border-radius: 15px;
+  border: 2px solid #2d31fa;
+}
+
+.backBtn:hover {
+  background-color: #2d31fa;
+  color: #dff6ff;
+  transition: all 0.3s ease-in-out;
+  border: 2px solid #2d31fa;
+}

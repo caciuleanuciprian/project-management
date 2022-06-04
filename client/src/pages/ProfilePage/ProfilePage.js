@@ -49,7 +49,7 @@ const ProfilePage = () => {
                   <span className={styles.profileUsername}>
                     {data.username}
                   </span>{" "}
-                  - {data.role}
+                  - {data.role !== null ? data.role : "No role"}
                 </p>
                 <p className={styles.profileField}>{data.email}</p>
                 <p className={styles.profileField}>hyperlink to project</p>

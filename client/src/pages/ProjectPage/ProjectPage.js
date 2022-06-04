@@ -8,6 +8,8 @@ import Task from "../../components/Tasks/Task";
 
 import styles from "./ProjectPage.module.css";
 
+import NotificationManager from "react-notifications/lib/NotificationManager";
+
 const ProjectPage = () => {
   const [data, setData] = useState();
   const [tasksInfo, setTasksInfo] = useState([]);
@@ -36,27 +38,32 @@ const ProjectPage = () => {
           console.log(data);
           tasksInfo.push(data);
         })
-        .catch((error) => console.log(error));
+        .catch((error) => {
+          console.log(error);
+        });
     });
   };
 
   useEffect(() => {
     displayTasksIfFetched();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data]);
+
   console.log(tasksInfo);
   return (
     <Fragment>
       <Navigation />
       <div className={styles.projectContainer}>
-        {data === undefined ? (
+        {data === "" ? (
           <div className={styles.loader}>
             <Loader />
+            <h1>Problem</h1>
           </div>
         ) : (
           <div>
             <div className={styles.header}>
               <h1 className={styles.projectTitle}>{data?.title}</h1>
-              <p className={styles.projectParagraph}>Project {data?._id}</p>
+              <p className={styles.projectParagraph}>Project ID: {data?._id}</p>
               <p className={styles.projectParagraph}>{data?.description}</p>
               <button
                 className={styles.addTaskBtn}
@@ -75,7 +82,9 @@ const ProjectPage = () => {
                 <p className={styles.columnTitle}>Backlog</p>
                 {tasksInfo.length === 0 ? (
                   <div>
-                    <Loader />
+                    <p className={styles.projectParagraph}>
+                      There are no tasks.
+                    </p>
                   </div>
                 ) : (
                   tasksInfo?.map((task) => {
@@ -95,12 +104,75 @@ const ProjectPage = () => {
               </div>
               <div className={styles.column}>
                 <p className={styles.columnTitle}>Development</p>
+                {tasksInfo.length === 0 ? (
+                  <div>
+                    <p className={styles.projectParagraph}>
+                      There are no tasks.
+                    </p>
+                  </div>
+                ) : (
+                  tasksInfo?.map((task) => {
+                    return (
+                      <Task
+                        key={task._id}
+                        title={task.title}
+                        description={task.description}
+                        assigned={task.assigned}
+                        reporter={task.reporter}
+                        type={task.type}
+                        estimation={task.estimation}
+                      />
+                    );
+                  })
+                )}
               </div>
               <div className={styles.column}>
                 <p className={styles.columnTitle}>Code Review</p>
+                {tasksInfo.length === 0 ? (
+                  <div>
+                    <p className={styles.projectParagraph}>
+                      There are no tasks.
+                    </p>
+                  </div>
+                ) : (
+                  tasksInfo?.map((task) => {
+                    return (
+                      <Task
+                        key={task._id}
+                        title={task.title}
+                        description={task.description}
+                        assigned={task.assigned}
+                        reporter={task.reporter}
+                        type={task.type}
+                        estimation={task.estimation}
+                      />
+                    );
+                  })
+                )}
               </div>
               <div className={styles.column}>
                 <p className={styles.columnTitle}>Merged</p>
+                {tasksInfo.length === 0 ? (
+                  <div>
+                    <p className={styles.projectParagraph}>
+                      There are no tasks.
+                    </p>
+                  </div>
+                ) : (
+                  tasksInfo?.map((task) => {
+                    return (
+                      <Task
+                        key={task._id}
+                        title={task.title}
+                        description={task.description}
+                        assigned={task.assigned}
+                        reporter={task.reporter}
+                        type={task.type}
+                        estimation={task.estimation}
+                      />
+                    );
+                  })
+                )}
               </div>
             </div>
           </div>
