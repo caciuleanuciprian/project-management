@@ -11,13 +11,16 @@ const UpdateTaskForm = (props) => {
     var ca = document.cookie.split(";");
     for (var i = 0; i < ca.length; i++) {
       var c = ca[i];
+      // eslint-disable-next-line eqeqeq
       while (c.charAt(0) == " ") c = c.substring(1, c.length);
+      // eslint-disable-next-line eqeqeq
       if (c.indexOf(username) == 0)
         return c.substring(username.length, c.length);
     }
     return null;
   };
 
+  // eslint-disable-next-line no-unused-vars
   const [currentUser, setCurrentUser] = useState(getUsernameCookie());
   const [task, setTask] = useState();
   const [title, setTitle] = useState(props.data.title);
