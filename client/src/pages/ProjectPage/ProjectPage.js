@@ -12,52 +12,71 @@ import NotificationManager from "react-notifications/lib/NotificationManager";
 
 const ProjectPage = () => {
   const [data, setData] = useState();
-  const [tasksInfo, setTasksInfo] = useState([]);
+  const [backlogArray, setBacklogArray] = useState([]);
+  const [developmentArray, setDevelopmentArray] = useState([]);
+  const [codeReviewArray, setCodeReviewArray] = useState([]);
+  const [mergedArray, setMergedArray] = useState([]);
   const location = useLocation();
   const navigate = useNavigate();
 
-  const fetchData = async () => {
+  const fetchProjectData = async () => {
     await axios
       .get(`${process.env.REACT_APP_API_LINK}${location.pathname}`)
       .then((res) => res.data)
-      .then((data) => setData(data));
+      .then((data) => {
+        setData(data);
+      });
   };
 
   if (data === undefined) {
-    fetchData();
+    fetchProjectData();
   }
 
-  console.log(data);
+  const backlogArrayHandler = async () => {
+    await axios
+      .get(`${process.env.REACT_APP_API_LINK}/tasks/getTasks/backlog`)
+      .then((res) => res.data)
+      .then((data) => setBacklogArray(data));
+  };
 
-  const displayTasksIfFetched = async () => {
-    await data?.tasks.forEach((task) => {
-      axios
-        .get(`${process.env.REACT_APP_API_LINK}/tasks/${task}`)
-        .then((res) => res.data)
-        .then((data) => {
-          console.log(data);
-          tasksInfo.push(data);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    });
+  const developmentArrayHandler = async () => {
+    await axios
+      .get(`${process.env.REACT_APP_API_LINK}/tasks/getTasks/development`)
+      .then((res) => res.data)
+      .then((data) => setDevelopmentArray(data));
+  };
+
+  const codeReviewArrayHandler = async () => {
+    await axios
+      .get(`${process.env.REACT_APP_API_LINK}/tasks/getTasks/codeReview`)
+      .then((res) => res.data)
+      .then((data) => setCodeReviewArray(data));
+  };
+
+  const mergedArrayHandler = async () => {
+    await axios
+      .get(`${process.env.REACT_APP_API_LINK}/tasks/getTasks/merged`)
+      .then((res) => res.data)
+      .then((data) => setMergedArray(data));
   };
 
   useEffect(() => {
-    displayTasksIfFetched();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    if (data !== undefined) {
+      backlogArrayHandler();
+      developmentArrayHandler();
+      codeReviewArrayHandler();
+      mergedArrayHandler();
+    }
+    console.log(backlogArray, developmentArray, codeReviewArray, mergedArray);
   }, [data]);
 
-  console.log(tasksInfo);
   return (
     <Fragment>
       <Navigation />
       <div className={styles.projectContainer}>
-        {data === "" ? (
+        {data === undefined ? (
           <div className={styles.loader}>
             <Loader />
-            <h1>Problem</h1>
           </div>
         ) : (
           <div>
@@ -80,17 +99,18 @@ const ProjectPage = () => {
             <div className={styles.tasksList}>
               <div className={styles.column}>
                 <p className={styles.columnTitle}>Backlog</p>
-                {tasksInfo.length === 0 ? (
+                {backlogArray?.length === 0 ? (
                   <div>
                     <p className={styles.projectParagraph}>
                       There are no tasks.
                     </p>
                   </div>
                 ) : (
-                  tasksInfo?.map((task) => {
+                  backlogArray?.map((task, index) => {
                     return (
                       <Task
-                        key={task._id}
+                        key={index}
+                        id={task._id}
                         title={task.title}
                         description={task.description}
                         assigned={task.assigned}
@@ -104,17 +124,18 @@ const ProjectPage = () => {
               </div>
               <div className={styles.column}>
                 <p className={styles.columnTitle}>Development</p>
-                {tasksInfo.length === 0 ? (
+                {developmentArray?.length === 0 ? (
                   <div>
                     <p className={styles.projectParagraph}>
                       There are no tasks.
                     </p>
                   </div>
                 ) : (
-                  tasksInfo?.map((task) => {
+                  developmentArray?.map((task, index) => {
                     return (
                       <Task
-                        key={task._id}
+                        key={index}
+                        id={task._id}
                         title={task.title}
                         description={task.description}
                         assigned={task.assigned}
@@ -128,17 +149,18 @@ const ProjectPage = () => {
               </div>
               <div className={styles.column}>
                 <p className={styles.columnTitle}>Code Review</p>
-                {tasksInfo.length === 0 ? (
+                {codeReviewArray?.length === 0 ? (
                   <div>
                     <p className={styles.projectParagraph}>
                       There are no tasks.
                     </p>
                   </div>
                 ) : (
-                  tasksInfo?.map((task) => {
+                  codeReviewArray?.map((task, index) => {
                     return (
                       <Task
-                        key={task._id}
+                        key={index}
+                        id={task._id}
                         title={task.title}
                         description={task.description}
                         assigned={task.assigned}
@@ -152,17 +174,18 @@ const ProjectPage = () => {
               </div>
               <div className={styles.column}>
                 <p className={styles.columnTitle}>Merged</p>
-                {tasksInfo.length === 0 ? (
+                {mergedArray?.length === 0 ? (
                   <div>
                     <p className={styles.projectParagraph}>
                       There are no tasks.
                     </p>
                   </div>
                 ) : (
-                  tasksInfo?.map((task) => {
+                  mergedArray?.map((task, index) => {
                     return (
                       <Task
-                        key={task._id}
+                        key={index}
+                        id={task._id}
                         title={task.title}
                         description={task.description}
                         assigned={task.assigned}

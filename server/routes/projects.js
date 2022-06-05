@@ -49,8 +49,6 @@ router.put("/updateProject/:id", async (req, res) => {
     {
       title: req.body.title,
       description: req.body.description,
-      tasks: req.body.tasks,
-      members: req.body.members,
     },
     {
       new: true,
@@ -63,7 +61,7 @@ router.put("/updateProject/:id", async (req, res) => {
       }
       return res.status(200).json(projectUpdated);
     })
-    .catch((error) => next(error));
+    .catch((error) => console.log(error));
 });
 
 router.put("/updateProjectWithTasks/:id", async (req, res) => {

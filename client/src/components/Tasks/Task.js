@@ -1,8 +1,17 @@
+import { useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import styles from "./Task.module.css";
 
 const Task = (props) => {
+  const navigate = useNavigate();
+  const location = useLocation();
   return (
-    <div className={styles.container}>
+    <div
+      className={styles.container}
+      onClick={() => {
+        navigate(props.id, { state: props.id });
+      }}
+    >
       <p className={styles.title}>{props.title}</p>
       <p className={styles.description}>{props.description}</p>
       <div className={styles.people}>

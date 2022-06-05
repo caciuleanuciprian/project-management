@@ -1,23 +1,19 @@
+import axios from "axios";
 import { Fragment, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import axios from "axios";
+import UpdateProjectForm from "../../components/Projects/UpdateProjectForm";
 import Navigation from "../../components/UI/Navigation";
-
-import styles from "./CreateTaskPage.module.css";
-
+import styles from "./CreateProjectPage.module.css";
 import Loader from "../../components/UI/Loader";
-import CreateTaskForm from "../../components/Tasks/CreateTaskForm";
 
-const tasksArray = [];
-
-const CreateTaskPage = () => {
+const UpdateProjectPage = () => {
   const [data, setData] = useState();
   const location = useLocation();
   const navigate = useNavigate();
 
   const fetchData = () => {
     axios
-      .get(`${process.env.REACT_APP_API_LINK}${location.state}`)
+      .get(`${process.env.REACT_APP_API_LINK}/projects/${location.state}`)
       .then((res) => res.data)
       .then((data) => setData(data));
   };
@@ -25,30 +21,16 @@ const CreateTaskPage = () => {
   if (data === undefined) {
     fetchData();
   }
-
-  console.log(location.state);
-
-  const addTaskToProject = (id) => {
-    tasksArray.push(id);
-    axios.put(
-      `${process.env.REACT_APP_API_LINK}/projects/updateProjectWithTasks/${data._id}`,
-      {
-        tasks: [...data.tasks, ...tasksArray],
-      }
-    );
-    console.log(data);
-  };
-
   return (
     <Fragment>
       <Navigation />
-      <div className={styles.createTaskContainer}>
+      <div className={styles.createProjectContainer}>
         {data === undefined ? (
           <div className={styles.loader}>
             <Loader />
           </div>
         ) : (
-          <div className={styles.createTaskMiddleContainer}>
+          <div className={styles.createProjectMiddleContainer}>
             <button
               className={styles.backBtn}
               onClick={() => {
@@ -57,10 +39,10 @@ const CreateTaskPage = () => {
             >
               Back
             </button>
-            <h1 className={styles.createTaskTitle}>
-              Create a new task for project: {data?.title}
-            </h1>
-            <CreateTaskForm sendTaskIdToParent={addTaskToProject} />
+            <p className={styles.createProjectTitle}>
+              Update project: {location.state}
+            </p>
+            <UpdateProjectForm data={data} />
           </div>
         )}
       </div>
@@ -68,4 +50,4 @@ const CreateTaskPage = () => {
   );
 };
 
-export default CreateTaskPage;
+export default UpdateProjectPage;

@@ -32,7 +32,7 @@ const TaskList = () => {
               return (
                 <Task
                   key={element._id}
-                  taskId={element._id}
+                  id={element._id}
                   title={element.title}
                   description={element.description}
                   assigned={element.assigned}

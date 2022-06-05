@@ -23,15 +23,16 @@ const Project = (props) => {
       <FontAwesomeIcon
         data-tip="Settings"
         data-for="settings"
-        onClick={() => console.log("open settings")}
+        onClick={() => navigate(props.id, { state: props.id })}
         className={styles.settings}
         icon={faGear}
       />
       <ReactToolTip
         id="settings"
         backgroundColor="#2d31fa"
-        place="right"
+        place="left"
         type="dark"
+        offset={{ left: "25px" }}
       />
     </div>
   );

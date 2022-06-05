@@ -28,6 +28,10 @@ const Task = mongoose.model(
       type: Number,
       default: null,
     },
+    status: {
+      type: String,
+      default: "backlog",
+    },
   })
 );
 
@@ -39,6 +43,7 @@ function validateTask(task) {
     reporter: Joi.string().required(),
     type: Joi.string(),
     estimation: Joi.number(),
+    status: Joi.string(),
   });
   return schema.validate(task);
 }
