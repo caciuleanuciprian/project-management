@@ -2,6 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 const cors = require("cors");
+const path = require("path");
 
 const users = require("./routes/users");
 const tasks = require("./routes/tasks");
@@ -13,6 +14,7 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
+app.use(express.static(path.resolve(__dirname, "./client/build")));
 app.use(express.urlencoded({ extended: true }));
 
 mongoose.connect(
