@@ -34,6 +34,7 @@ const ProjectList = () => {
     <div className={styles.container}>
       {fetched ? (
         projectsList.map((element) => {
+          console.log(element);
           return (
             <Project
               key={element._id}

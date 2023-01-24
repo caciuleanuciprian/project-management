@@ -7,15 +7,9 @@ import Navigation from "../../components/UI/Navigation";
 import Task from "../../components/Tasks/Task";
 
 import styles from "./ProjectPage.module.css";
-
-import NotificationManager from "react-notifications/lib/NotificationManager";
-
+const tasksArray = [];
 const ProjectPage = () => {
   const [data, setData] = useState();
-  const [backlogArray, setBacklogArray] = useState([]);
-  const [developmentArray, setDevelopmentArray] = useState([]);
-  const [codeReviewArray, setCodeReviewArray] = useState([]);
-  const [mergedArray, setMergedArray] = useState([]);
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -25,6 +19,17 @@ const ProjectPage = () => {
       .then((res) => res.data)
       .then((data) => {
         setData(data);
+        console.log(data);
+      });
+  };
+
+  const fetchTasks = async (task) => {
+    await axios
+      .get(`${process.env.REACT_APP_API_LINK}/tasks/${task}`)
+      .then((res) => res.data)
+      .then((data) => {
+        tasksArray.push(data);
+        console.log(data);
       });
   };
 
@@ -32,43 +37,15 @@ const ProjectPage = () => {
     fetchProjectData();
   }
 
-  const backlogArrayHandler = async () => {
-    await axios
-      .get(`${process.env.REACT_APP_API_LINK}/tasks/getTasks/backlog`)
-      .then((res) => res.data)
-      .then((data) => setBacklogArray(data));
-  };
-
-  const developmentArrayHandler = async () => {
-    await axios
-      .get(`${process.env.REACT_APP_API_LINK}/tasks/getTasks/development`)
-      .then((res) => res.data)
-      .then((data) => setDevelopmentArray(data));
-  };
-
-  const codeReviewArrayHandler = async () => {
-    await axios
-      .get(`${process.env.REACT_APP_API_LINK}/tasks/getTasks/codeReview`)
-      .then((res) => res.data)
-      .then((data) => setCodeReviewArray(data));
-  };
-
-  const mergedArrayHandler = async () => {
-    await axios
-      .get(`${process.env.REACT_APP_API_LINK}/tasks/getTasks/merged`)
-      .then((res) => res.data)
-      .then((data) => setMergedArray(data));
-  };
-
   useEffect(() => {
     if (data !== undefined) {
-      backlogArrayHandler();
-      developmentArrayHandler();
-      codeReviewArrayHandler();
-      mergedArrayHandler();
+      data.tasks.forEach((task) => {
+        fetchTasks(task);
+      });
     }
-    console.log(backlogArray, developmentArray, codeReviewArray, mergedArray);
   }, [data]);
+
+  console.log(tasksArray);
 
   return (
     <Fragment>
@@ -99,17 +76,11 @@ const ProjectPage = () => {
             <div className={styles.tasksList}>
               <div className={styles.column}>
                 <p className={styles.columnTitle}>Backlog</p>
-                {backlogArray?.length === 0 ? (
-                  <div>
-                    <p className={styles.projectParagraph}>
-                      There are no tasks.
-                    </p>
-                  </div>
-                ) : (
-                  backlogArray?.map((task, index) => {
+                {tasksArray.map((task) => {
+                  if (task.status === "backlog") {
                     return (
                       <Task
-                        key={index}
+                        key={task._id}
                         id={task._id}
                         title={task.title}
                         description={task.description}
@@ -119,22 +90,17 @@ const ProjectPage = () => {
                         estimation={task.estimation}
                       />
                     );
-                  })
-                )}
+                  }
+                  return null;
+                })}
               </div>
               <div className={styles.column}>
                 <p className={styles.columnTitle}>Development</p>
-                {developmentArray?.length === 0 ? (
-                  <div>
-                    <p className={styles.projectParagraph}>
-                      There are no tasks.
-                    </p>
-                  </div>
-                ) : (
-                  developmentArray?.map((task, index) => {
+                {tasksArray.map((task) => {
+                  if (task.status === "development") {
                     return (
                       <Task
-                        key={index}
+                        key={task._id}
                         id={task._id}
                         title={task.title}
                         description={task.description}
@@ -144,22 +110,17 @@ const ProjectPage = () => {
                         estimation={task.estimation}
                       />
                     );
-                  })
-                )}
+                  }
+                  return null;
+                })}
               </div>
               <div className={styles.column}>
                 <p className={styles.columnTitle}>Code Review</p>
-                {codeReviewArray?.length === 0 ? (
-                  <div>
-                    <p className={styles.projectParagraph}>
-                      There are no tasks.
-                    </p>
-                  </div>
-                ) : (
-                  codeReviewArray?.map((task, index) => {
+                {tasksArray.map((task) => {
+                  if (task.status === "codeReview") {
                     return (
                       <Task
-                        key={index}
+                        key={task._id}
                         id={task._id}
                         title={task.title}
                         description={task.description}
@@ -169,22 +130,17 @@ const ProjectPage = () => {
                         estimation={task.estimation}
                       />
                     );
-                  })
-                )}
+                  }
+                  return null;
+                })}
               </div>
               <div className={styles.column}>
                 <p className={styles.columnTitle}>Merged</p>
-                {mergedArray?.length === 0 ? (
-                  <div>
-                    <p className={styles.projectParagraph}>
-                      There are no tasks.
-                    </p>
-                  </div>
-                ) : (
-                  mergedArray?.map((task, index) => {
+                {tasksArray.map((task) => {
+                  if (task.status === "merged") {
                     return (
                       <Task
-                        key={index}
+                        key={task._id}
                         id={task._id}
                         title={task.title}
                         description={task.description}
@@ -194,8 +150,9 @@ const ProjectPage = () => {
                         estimation={task.estimation}
                       />
                     );
-                  })
-                )}
+                  }
+                  return null;
+                })}
               </div>
             </div>
           </div>
